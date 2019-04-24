@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Abdullah Alzahrani">
+
+  <title>Protocol Teacher - Network Protocols</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Plugin CSS -->
+  <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="css/freelancer.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="home.html">Protocol Teacher</a>
+      
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="masthead bg-primary text-white text-center">
+    <div class="container-fluid">
+      <h1 class="text-uppercase mb-0">Network Protocols</h1>
+      <hr class="star-dark"></hr>
+     </div>
+  </header>
+  
+
+
+
+    <div class="container-fluid bg-primary text-blackleft">
+
+
+        <h1 class="left text-uppercase text-white">Ethernet II</h1>
+        <p class="para text-white">An Ethernet frame is a data link layer 
+          protocol data unit and uses the underlying Ethernet physical layer 
+          transport mechanisms. 
+          <br>
+          It includes the following header fields:
+          <br>
+          <br>
+          - Preamble: This offers synchronization since both sender and 
+          receiver interface cards are running with different system clocks.
+          <br>
+          <br>
+          -	Destination Address: The Media Access Control (MAC) address
+           where this frame is supposed to go.
+          <br>
+          <br>
+          - Source Address: The MAC address of the sending device.
+          <br>
+          <br>
+          -	Type: Sets the kind of packet that is in the data field. 
+          Its also called Ether Type.
+          <br>
+          Type Codes: 
+          <br>
+          IPv4  080016  
+          <br>
+          IPv6  86DD16  
+          <br>
+          <br>
+          -	Payload (Body): The minimum payload is 42 octets when an
+           802.1Q tag is present and 46 octets when absent. When the
+            actual payload is less, padding bytes are added accordingly.
+             The maximum payload is 1500 octets. Non-standard jumbo frames 
+            allow for larger maximum payload size.
+          <br>
+          <br>
+          -	CRS: Frame check sequence it refers to an error-detecting code added 
+          to a frame in a communications protocol. 
+        </p>
+      <br><br>
+        <h1 class="left text-uppercase text-white">IPv4</h1>
+        <p class="para text-white">
+            IPv4 is a connectionless protocol for use on packet-switched networks. It operates on a best effort delivery model, in that it does not guarantee delivery, nor does it assure proper sequencing or avoidance of duplicate delivery. These aspects, including data integrity, are addressed by an upper layer transport protocol, such as the Transmission Control Protocol (TCP).
+            <br>
+            It includes the following header fields:
+            <br>
+            <br>
+            -	Version: The first header field in an IP packet is the
+             four-bit version field. For IPv4, this is always equal to 4.
+            <br>
+            <br>
+            -	HLen: The Internet Header Length (IHL) field has 4 bits, which is the number of 32-bit words. Since an IPv4 header may contain a variable number of options, this field specifies the size of the header (this also coincides with the offset to the data). 
+            <br>
+            <br>
+            -	TOS: 
+            The type of service (ToS) field is the second byte of the IPv4 header. It has had various purposes over the years, and has been defined in different ways by five RFCs.
+            
+            <br>
+            <br>
+            -	Length: 
+            This 16-bit field defines the entire packet size in bytes, including header and data. The minimum size is 20 bytes.
+            <br>
+            <br>
+            -	Ident: 
+            This field is an identification field and is primarily used for uniquely identifying the group of fragments of a single IP datagram.
+            <br>
+            <br>
+            -	Flags: 
+            A three-bit field follows and is used to control or identify fragments. They are (in order, from most significant to least significant):
+            bit 0: Reserved; must be zero.
+            <br>
+            bit 1: Don't Fragment (DF)
+            <br>
+            bit 2: More Fragments (MF)
+            
+            <br>
+            <br>
+            -	Offset: 
+            The fragment offset field is measured in units of eight-byte blocks. It is 13 bits long and specifies the offset of a particular fragment relative to the beginning of the original unfragmented IP datagram. 
+            <br>
+            <br>
+            -	TTL: 
+            An eight-bit time to live field helps prevent datagrams from persisting (e.g. going in circles) on an internet.
+            <br>
+            <br>
+            -	Protocol: 
+            This field defines the protocol used in the data portion of the IP datagram. 
+            <br>
+            <br>
+            -	Checksum: 
+            The 16-bit IPv4 header checksum field is used for error-checking of the header. 
+            <br>
+            <br>
+            -	SourceAddr: 
+            This field is the IPv4 address of the sender of the packet.
+            <br>
+            <br>
+            -	DestinationAddr: 
+            This field is the IPv4 address of the receiver of the packet. 
+            <br>
+            <br>
+            -	Options (variable): 
+            The options field is not often used. 
+            <br>
+            <br>
+            -	Pad (variable): 
+            Any padding needed to ensure that the header contains an integer number of 32-bit words.
+            
+            <br>
+            <br>
+            -	Payload: 
+            The packet payload is not included in the checksum. Its contents are interpreted based on the value of the Protocol header field.
+        </p>
+      <br><br>
+        <h1 class="left text-uppercase text-white">IPv6</h1>
+        <p class="para text-white">
+            Internet Protocol version 6 (IPv6) is the most recent version of the Internet Protocol (IP), the communications protocol that provides an identification and location system for computers on networks and routes traffic across the Internet. IPv6 was developed by the Internet Engineering Task Force (IETF) to deal with the long-anticipated problem of IPv4 address exhaustion. IPv6 is intended to replace IPv4.
+            <br>
+            It includes the following header fields:
+            <br>
+            <br>
+            -	Version: 
+            The constant 6 (bit sequence 0110).
+            
+            <br>
+            <br>
+            -	TrafficClass: 
+            The bits of this field hold two values. The six most-significant bits hold the Differentiated Services (DS) field, which is used to classify packets. Currently, all standard DS fields end with a '0' bit. Any DS field that ends with two '1' bits is intended for local or experimental use.
+            The remaining two bits are used for Explicit Congestion Notification (ECN).
+            <br>
+            <br>
+            -	FlowLabel: 
+            Originally created for giving real-time applications special service. When set to a non-zero value, it serves as a hint to routers and switches with multiple outbound paths that these packets should stay on the same path.
+            <br>
+            <br>
+            -	PayloadLen: 
+            The size of the payload in octets, including any extension headers. 
+            <br>
+            <br>
+            -	NextHeader: 
+            Specifies the type of the next header. This field usually specifies the transport layer protocol used by a packet's payload. 
+            <br>
+            <br>
+            -	HopeLimit: 
+            Replaces the time to live field of IPv4.
+            <br>
+            <br>
+            -	SourceAddress: 
+            The IPv6 address of the sending node.
+            
+            <br>
+            <br>
+            -	DestinationAddress: 
+            The IPv6 address of the destination node(s).
+            
+            <br>
+            <br>
+            -	Next Header/Data
+        </p>
+      <br><br>
+        <h1 class="left text-uppercase text-white">TCP</h1>
+        <p class="para text-white">
+            The Transmission Control Protocol (TCP) is one of the main protocols of the Internet protocol suite. It originated in the initial network implementation in which it complemented the Internet Protocol (IP). Therefore, the entire suite is commonly referred to as TCP/IP. TCP provides reliable, ordered, and error-checked delivery of a stream of octets (bytes) between applications running on hosts communicating via an IP network. Major internet applications such as the World Wide Web, email, remote administration, and file transfer rely on TCP. 
+            <br>
+            It includes the following header fields:
+            <br>
+            <br>
+            -	SrcPort: 
+            Identifies the sending port.
+            
+            <br>
+            <br>
+            -	DstPort: 
+            Identifies the receiving port.
+            
+            <br>
+            <br>
+            -	SequenceNum: 
+            Has a dual role:
+            <br>
+            If the SYN flag is set (1), then this is the initial sequence number. The sequence number of the actual first data byte and the acknowledged number in the corresponding ACK are then this sequence number plus 1.
+            <br>
+            If the SYN flag is clear (0), then this is the accumulated sequence number of the first data byte of this segment for the current session.
+            
+            <br>
+            <br>
+            -	Acknowledgment: 
+            If the ACK flag is set then the value of this field is the next sequence number that the sender of the ACK is expecting.
+            <br>
+            <br>
+            -	HdrLen: 
+            A HdrLen field is included that gives
+            the length of the header in 32-bit words.
+            
+            <br>
+            <br>
+            -	0
+            <br>
+            <br>
+            -	Flags: 
+            Contains 9 1-bit flags.
+            
+            <br>
+            <br>
+            -	AdvertisedWindow: 
+            The size of the receive window, which specifies the number of window size units that the sender of this segment is currently willing to receive.
+            <br>
+            <br>
+            -	Checksum: 
+            The 16-bit checksum field is used for error-checking of the header, the Payload and a Pseudo-Header. 
+            <br>
+            <br>
+            -	UrgPtr: 
+            if the URG flag is set, then this 16-bit field is an offset from the sequence number indicating the last urgent data byte.
+            
+            <br>
+            <br>
+            -	Options (variable):
+            The length of this field is determined by the data offset field. 
+            <br>
+            <br>
+            -	Data
+        </p>
+      <br><br>
+        <h1 class="left text-uppercase text-white">UDP</h1>
+        <p class="para text-white">
+            User Datagram Protocol (UDP) is one of the core members of the Internet protocol suite. The protocol was designed by David P. Reed in 1980 and formally defined in RFC 768. With UDP, computer applications can send messages, in this case referred to as datagrams, to other hosts on an Internet Protocol (IP) network. Prior communications are not required in order to set up communication channels or data paths. UDP uses a simple connectionless communication model with a minimum of protocol mechanism.
+            <br>
+            It includes the following header fields:
+            <br>
+            <br>
+            -	Source Port: 
+            Identifies the sending port.
+            
+            <br>
+            <br>
+            -	Destination Port: 
+            Identifies the receiving port.
+            
+            <br>
+            <br>
+            -	Length: 
+            This field that specifies the length in bytes of the UDP header and UDP data.
+            <br>
+            <br>
+            -	Checksum: 
+            The checksum field may be used for error-checking of the header and data.
+            <br>
+            <br>
+            -	Data
+        </p>
+      <br><br>
+        <h1 class="left text-uppercase text-white">ICMP</h1>
+        <p class="para text-white">
+            
+        </p>
+      <br><br>
+
+    </div>
+
+  <div class="copyright py-4 text-center text-white">
+    <div class="container">
+      <small>Copyright &copy; Protocol Teacher 2019</small>
+    </div>
+  </div>
+
+  <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+  <div class="scroll-to-top d-lg-none position-fixed ">
+    <a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+</body>
+
+</html>
