@@ -54,26 +54,22 @@
 
 
         <h1 class="left text-uppercase text-white">Ethernet II</h1>
-        <p class="para text-white">An Ethernet frame is a data link layer 
-          protocol data unit and uses the underlying Ethernet physical layer 
-          transport mechanisms. 
+        <p class="para text-white">
+            Ethernet II frame is a basic data unit that is transported in the physical layer of the OSI model. 
           <br>
           It includes the following header fields:
           <br>
           <br>
-          - Preamble: This offers synchronization since both sender and 
-          receiver interface cards are running with different system clocks.
+          - Preamble: Preamble helps with synchronization between both the sender and receiver.
           <br>
           <br>
-          -	Destination Address: The Media Access Control (MAC) address
-           where this frame is supposed to go.
+          -	Destination Address: The MAC address of the receiving node.
           <br>
           <br>
-          - Source Address: The MAC address of the sending device.
+          - Source Address: The MAC address of the sending node.
           <br>
           <br>
-          -	Type: Sets the kind of packet that is in the data field. 
-          Its also called Ether Type.
+          -	Type: Includes the type of packet in its data field.
           <br>
           Type Codes: 
           <br>
@@ -82,170 +78,155 @@
           IPv6  86DD16  
           <br>
           <br>
-          -	Payload (Body): The minimum payload is 42 octets when an
-           802.1Q tag is present and 46 octets when absent. When the
-            actual payload is less, padding bytes are added accordingly.
-             The maximum payload is 1500 octets. Non-standard jumbo frames 
-            allow for larger maximum payload size.
+          -	Payload (Body): A maximum payload of 1500 octets.
           <br>
           <br>
-          -	CRS: Frame check sequence it refers to an error-detecting code added 
-          to a frame in a communications protocol. 
+          -	CRC: Cyclic Redundancy Check helps with error detecting. 
         </p>
       <br><br>
         <h1 class="left text-uppercase text-white">IPv4</h1>
         <p class="para text-white">
-            IPv4 is a connectionless protocol for use on packet-switched networks. It operates on a best effort delivery model, in that it does not guarantee delivery, nor does it assure proper sequencing or avoidance of duplicate delivery. These aspects, including data integrity, are addressed by an upper layer transport protocol, such as the Transmission Control Protocol (TCP).
+            IPv4 is the most used internet protocol, it is a connectionless protocol, it does not guarantee delivery, nor data integrity. It uses an IPv4 address space of 31 bits, which is not enough to give each node a unique address, this problem is solved by using the later version IPv6 which uses an address space of 128 bits.
             <br>
             It includes the following header fields:
             <br>
             <br>
-            -	Version: The first header field in an IP packet is the
-             four-bit version field. For IPv4, this is always equal to 4.
+            -	Version: This includes a four-bit version field, it is always set to 4
             <br>
             <br>
-            -	HLen: The Internet Header Length (IHL) field has 4 bits, which is the number of 32-bit words. Since an IPv4 header may contain a variable number of options, this field specifies the size of the header (this also coincides with the offset to the data). 
+            -	HLen: Internet Header Length includes the size of the header in four bits.
             <br>
             <br>
             -	TOS: 
-            The type of service (ToS) field is the second byte of the IPv4 header. It has had various purposes over the years, and has been defined in different ways by five RFCs.
-            
+            The Type of Service is used to request a low delay route and priority.            
             <br>
             <br>
             -	Length: 
-            This 16-bit field defines the entire packet size in bytes, including header and data. The minimum size is 20 bytes.
+            This includes the size of the packet including the header. Maximum size is 65,535 bytes and minimum size is 20 bytes.         
             <br>
             <br>
             -	Ident: 
-            This field is an identification field and is primarily used for uniquely identifying the group of fragments of a single IP datagram.
+            This identifies the fragments of an IP datagram.          
             <br>
             <br>
             -	Flags: 
-            A three-bit field follows and is used to control or identify fragments. They are (in order, from most significant to least significant):
+            This is used to identify fragments. If the second bit is set then the packet will not be fragmented, and it will be dropped if it can not be routed without fragmentation. If the third bit is set then more fragments are expected, if not set then it will be the last fragment.      
+            <br>      
             bit 0: Reserved; must be zero.
             <br>
-            bit 1: Don't Fragment (DF)
+            bit 1: Don't Fragment
             <br>
-            bit 2: More Fragments (MF)
-            
+            bit 2: More Fragments
             <br>
             <br>
             -	Offset: 
-            The fragment offset field is measured in units of eight-byte blocks. It is 13 bits long and specifies the offset of a particular fragment relative to the beginning of the original unfragmented IP datagram. 
+            This is used to place the fragmented packet in the correct position within the entire unfragmented packet. The value is multiplied by 8 which gives the maximum size of 212 × 8 = 65,528 bytes.
             <br>
             <br>
             -	TTL: 
-            An eight-bit time to live field helps prevent datagrams from persisting (e.g. going in circles) on an internet.
+            Time to Live helps prevent packets from circling the internet indefinitely. It also helps with counting hops since every time a packet reaches a router the TTL is decreased until it reaches zero then the packet gets dropped.
             <br>
             <br>
             -	Protocol: 
-            This field defines the protocol used in the data portion of the IP datagram. 
+            This includes the protocol carried in the data section of the IPv4 packet.
             <br>
             <br>
             -	Checksum: 
-            The 16-bit IPv4 header checksum field is used for error-checking of the header. 
+            Checksum is used for error checking.
             <br>
             <br>
             -	SourceAddr: 
-            This field is the IPv4 address of the sender of the packet.
+            Includes the IPv4 address of the source node.
             <br>
             <br>
             -	DestinationAddr: 
-            This field is the IPv4 address of the receiver of the packet. 
+            Includes the IPv4 address of the destination node.
             <br>
             <br>
             -	Options (variable): 
-            The options field is not often used. 
+            This field is not usually used.
             <br>
             <br>
             -	Pad (variable): 
-            Any padding needed to ensure that the header contains an integer number of 32-bit words.
-            
+            This is used to ensure that the packet length is a multiple of 32 bits.            
             <br>
             <br>
             -	Payload: 
-            The packet payload is not included in the checksum. Its contents are interpreted based on the value of the Protocol header field.
-        </p>
+            This includes the data carried in the IPv4 packet.
+          </p>
       <br><br>
         <h1 class="left text-uppercase text-white">IPv6</h1>
         <p class="para text-white">
-            Internet Protocol version 6 (IPv6) is the most recent version of the Internet Protocol (IP), the communications protocol that provides an identification and location system for computers on networks and routes traffic across the Internet. IPv6 was developed by the Internet Engineering Task Force (IETF) to deal with the long-anticipated problem of IPv4 address exhaustion. IPv6 is intended to replace IPv4.
+            IPv6 was introduced to solve problems with IPv4. The main problem is the number of addresses available, IPv6 has an address space of 128 bits, this means it can support an astronomical number of devices (340 undecillion). It also provides other technical benefits. 
             <br>
             It includes the following header fields:
             <br>
             <br>
             -	Version: 
-            The constant 6 (bit sequence 0110).
-            
+            Include a constant value of 6.            
             <br>
             <br>
             -	TrafficClass: 
-            The bits of this field hold two values. The six most-significant bits hold the Differentiated Services (DS) field, which is used to classify packets. Currently, all standard DS fields end with a '0' bit. Any DS field that ends with two '1' bits is intended for local or experimental use.
-            The remaining two bits are used for Explicit Congestion Notification (ECN).
+            This includes two main functionalities. The first 6 bits are called Differentiated Services, it is used to classify packets. The last 2 bits are called Explicit Congestion Notification, it is used for congestion control.
             <br>
             <br>
             -	FlowLabel: 
-            Originally created for giving real-time applications special service. When set to a non-zero value, it serves as a hint to routers and switches with multiple outbound paths that these packets should stay on the same path.
+            This is used to make sure that the packet stays on the same path when set to non-zero.
             <br>
             <br>
             -	PayloadLen: 
-            The size of the payload in octets, including any extension headers. 
+            This includes the size of the payload carried in octets.
             <br>
             <br>
             -	NextHeader: 
-            Specifies the type of the next header. This field usually specifies the transport layer protocol used by a packet's payload. 
+            This includes the protocol carried in the payload section of the IPv6 packet.
             <br>
             <br>
             -	HopeLimit: 
-            Replaces the time to live field of IPv4.
+            Hope Limit prevent packets from circling the internet indefinitely. It also helps with counting hops since every time a packet reaches a router the HopeLimit is decreased until it reaches zero then the packet gets dropped.
             <br>
             <br>
             -	SourceAddress: 
-            The IPv6 address of the sending node.
-            
+            Includes the IPv6 address of the source node.            
             <br>
             <br>
             -	DestinationAddress: 
-            The IPv6 address of the destination node(s).
-            
+            Includes the IPv6 address of the source node.            
             <br>
             <br>
-            -	Next Header/Data
+            -	Next Header/Data: 
+            This includes the data carried in the IPv6 packet.
         </p>
       <br><br>
         <h1 class="left text-uppercase text-white">TCP</h1>
         <p class="para text-white">
-            The Transmission Control Protocol (TCP) is one of the main protocols of the Internet protocol suite. It originated in the initial network implementation in which it complemented the Internet Protocol (IP). Therefore, the entire suite is commonly referred to as TCP/IP. TCP provides reliable, ordered, and error-checked delivery of a stream of octets (bytes) between applications running on hosts communicating via an IP network. Major internet applications such as the World Wide Web, email, remote administration, and file transfer rely on TCP. 
+            The Transmission Control Protocol is one of the most commonly used protocols. It provides error-checking, reliability, and ordering for applications running on different devices. Most notably the World Wide Web, file transfer, email, and more.
             <br>
             It includes the following header fields:
             <br>
             <br>
             -	SrcPort: 
-            Identifies the sending port.
-            
+            Includes the sending port.            
             <br>
             <br>
             -	DstPort: 
-            Identifies the receiving port.
-            
+            Includes the receiving port.            
             <br>
             <br>
             -	SequenceNum: 
-            Has a dual role:
+            This includes two main functionalities: 
             <br>
-            If the SYN flag is set (1), then this is the initial sequence number. The sequence number of the actual first data byte and the acknowledged number in the corresponding ACK are then this sequence number plus 1.
+            When the SYN flag is set then it will include the initial sequence number.
             <br>
-            If the SYN flag is clear (0), then this is the accumulated sequence number of the first data byte of this segment for the current session.
-            
+            When the SYN flag is not set then it will include the accumulated sequence number.            
             <br>
             <br>
             -	Acknowledgment: 
-            If the ACK flag is set then the value of this field is the next sequence number that the sender of the ACK is expecting.
+            When the ACK flag is set this will include the next sequence number.
             <br>
             <br>
             -	HdrLen: 
-            A HdrLen field is included that gives
-            the length of the header in 32-bit words.
+            This includes the length of the header.
             
             <br>
             <br>
@@ -253,61 +234,85 @@
             <br>
             <br>
             -	Flags: 
-            Contains 9 1-bit flags.
-            
+            This includes 9 1-bit flags.            
             <br>
             <br>
             -	AdvertisedWindow: 
-            The size of the receive window, which specifies the number of window size units that the sender of this segment is currently willing to receive.
+            This includes the receive window size.
             <br>
             <br>
             -	Checksum: 
-            The 16-bit checksum field is used for error-checking of the header, the Payload and a Pseudo-Header. 
+            Checksum is used for error checking.
             <br>
             <br>
             -	UrgPtr: 
-            if the URG flag is set, then this 16-bit field is an offset from the sequence number indicating the last urgent data byte.
-            
+            When URG flag is set then this will include an offset from the sequence number.            
             <br>
             <br>
             -	Options (variable):
-            The length of this field is determined by the data offset field. 
+            This includes; Option-Kind, Option-Length, and Option-Data.
             <br>
             <br>
-            -	Data
+            -	Data: 
+            This includes the data carried in the packet.
         </p>
       <br><br>
         <h1 class="left text-uppercase text-white">UDP</h1>
         <p class="para text-white">
-            User Datagram Protocol (UDP) is one of the core members of the Internet protocol suite. The protocol was designed by David P. Reed in 1980 and formally defined in RFC 768. With UDP, computer applications can send messages, in this case referred to as datagrams, to other hosts on an Internet Protocol (IP) network. Prior communications are not required in order to set up communication channels or data paths. UDP uses a simple connectionless communication model with a minimum of protocol mechanism.
+            The User Datagram Protocol is another commonly used protocol. It is a simple and connectionless protocol. It does not have guarantee of delivery, duplicate protection, or ordering. It is used when we only care about time delivery like with VoIP (Voice Over IP).
             <br>
             It includes the following header fields:
             <br>
             <br>
             -	Source Port: 
-            Identifies the sending port.
-            
+            Includes the sending port.            
             <br>
             <br>
             -	Destination Port: 
-            Identifies the receiving port.
-            
+            Includes the receiving port.            
             <br>
             <br>
             -	Length: 
-            This field that specifies the length in bytes of the UDP header and UDP data.
+            This includes the length of the header.
             <br>
             <br>
             -	Checksum: 
-            The checksum field may be used for error-checking of the header and data.
+            Checksum is used for error checking.
             <br>
             <br>
-            -	Data
+            -	Data: 
+            This includes the data carried in the packet.
         </p>
       <br><br>
         <h1 class="left text-uppercase text-white">ICMP</h1>
         <p class="para text-white">
-            
+            The Internet Control Message Protocol (ICMP) is an error checking protocol. It helps devices report errors to each other through a network. For example, it can be used to report that a host or a router cannot be reached.
+            <br>
+            It includes the following header fields:
+            <br>
+            <br>
+            - Type: 
+            Includes the ICMP type.
+            <br>
+            <br>
+            -	Code: 
+            Includes the ICMP subtype.
+            <br>
+            <br>
+            -	Checksum: 
+            Checksum is used for error checking.
+            <br>
+            <br>
+            -	Identifier: 
+            Used with a timestamp request.
+            <br>
+            <br>
+            -	Sequence Number: 
+            Used with a timestamp request.
+            <br>
+            <br>
+            -	Optional Data: 
+            Includes a copy of the IP header, and the first 8 bytes of the data.            
         </p>
       <br><br>
 

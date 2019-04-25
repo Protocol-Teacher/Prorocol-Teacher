@@ -5,17 +5,25 @@ $(document).ready(function () {
   buildTable(ether);
 });
 
-
-
+//Description: Enable Popovers
+//Parameters: nothing.
+//Return: nothing.
 function popOver() {
   $('[data-toggle="popover"]').popover();
 };
 
+//Description: Clear All Popovers
+//Parameters: nothing.
+//Return: nothing.
 function clearPopOver() {
   $('.popover').remove();
 };
 
+//Description: Populate and update the bread to show the stack of protocols.
+//Parameters: Protocol.
+//Return: nothing.
 function updateBread(bread) {
+  //Add protocol
   var arrayLength = breads.length;
   if(breads.arrayLength == 0){
     breads.push(bread);
@@ -30,10 +38,8 @@ function updateBread(bread) {
     }
     breads.push(bread);  
   }
-  
-
+  //build the stack 
   let inner = '<ol class="breadcrumb">';
-
   arrayLength = breads.length;
   for (var i = 0; i < arrayLength; i++) {
 
@@ -49,15 +55,17 @@ function updateBread(bread) {
     }
   } 
   inner += '</ol> <br>';
-  
   document.getElementById("bread").innerHTML = inner;
 }
 
+//Description: Add links to the bottom of the table
+//Parameters: Protocol.
+//Return: nothing.
 function links(protcol) {
   let wiki;
   let rfc;
   let prt = protcol;
-
+  //list of links for each protocol
   if(protcol == "IPv4"){
     wiki = "'https://en.wikipedia.org/wiki/IPv4'";
     rfc = "'https://www.rfc-editor.org/rfc/pdfrfc/rfc791.txt.pdf'";
@@ -77,7 +85,7 @@ function links(protcol) {
     wiki = "'https://en.wikipedia.org/wiki/Ethernet_frame#Ethernet_II'";
   }
   wiki += ",'_blank'";
-
+  //build the links
   let inner = '<div class="row">' +
     '<div class="col-5" id="length">' +
     '<h6 class="mb-0 text-white">For More Information About ' + prt + ' Visit:</h6>' +
@@ -97,6 +105,9 @@ function links(protcol) {
   document.getElementById("links").innerHTML = inner;
 }
 
+//Description: Show the bytes on top of the table
+//Parameters: nothing.
+//Return: nothing.
 function bytes() {
   let inner = '<div class="row">' +
     '<div class="col-1" id="length">1</div>' +
@@ -106,6 +117,9 @@ function bytes() {
   document.getElementById("bytes").innerHTML = inner;
 }
 
+//Description: The main method to bulid the protocol table
+//Parameters: Protocol.
+//Return: nothing.
 function buildTable(protcol) {
   if(protcol == IPv4){
     updateBread("IPv4");
@@ -126,7 +140,6 @@ function buildTable(protcol) {
     updateBread("Ethernet II");
     links("Ethernet II");
   }
-
 
   let obj = protcol;
   let inner = '';
@@ -160,6 +173,8 @@ function buildTable(protcol) {
   bytes();
 };
 
+//---------Data-----------
+
 let breads = [];
 
 let ether = [
@@ -168,35 +183,35 @@ let ether = [
       name: "Preamble",
       size: "-2",
       id: "staticBox",
-      data: "This offers synchronization since both sender and receiver interface cards are running with different system clocks.",
+      data: "Preamble helps with synchronization between both the sender and receiver.",
       placement: "bottom"
     },
     {
       name: "Destination Address",
       size: "-2",
       id: "staticBox",
-      data: "The Media Access Control (MAC) address where this frame is supposed to go.",
+      data: "The MAC address of the receiving node.",
       placement: "bottom"
     },
     {
       name: "Source Address",
       size: "-2",
       id: "staticBox",
-      data: "The MAC address of the sending device.",
+      data: "The MAC address of the sending node.",
       placement: "bottom"
     },
     {
       name: "Type",
       size: "-1",
       id: "staticBox",
-      data: "Sets the kind of packet that is in the data field. Its also called Ether Type.",
+      data: "Includes the type of packet in its data field.",
       placement: "bottom"
     },
     {
       name: "Payload (Body)",
       size: "-4 dropdown",
       id: "selectBoxData",
-      data: "The minimum payload is 42 octets when an 802.1Q tag is present and 46 octets when absent. When the actual payload is less, padding bytes are added accordingly. The maximum payload is 1500 octets. Non-standard jumbo frames allow for larger maximum payload size.",
+      data: "A maximum payload of 1500 octets.",
       placement: "top",
       list: [
         {
@@ -208,10 +223,10 @@ let ether = [
       ]
     },
     {
-      name: "CRS",
+      name: "CRC",
       size: "-1",
       id: "staticBox",
-      data: "Frame check sequence it refers to an error-detecting code added to a frame in a communications protocol.",
+      data: "Cyclic Redundancy Check helps with error detecting.",
       placement: "bottom"
     }
   ]
@@ -223,28 +238,28 @@ let IPv4 = [
       name: "Version",
       size: "-2",
       id: "staticBox",
-      data: "The first header field in an IP packet is the four-bit version field. For IPv4, this is always equal to 4.",
+      data: "This includes a four-bit version field, it is always set to 4.",
       placement: "bottom"
     },
     {
       name: "HLen",
       size: "-2",
       id: "staticBox",
-      data: "The Internet Header Length (IHL) field has 4 bits, which is the number of 32-bit words. Since an IPv4 header may contain a variable number of options, this field specifies the size of the header (this also coincides with the offset to the data).",
+      data: "Internet Header Length includes the size of the header in four bits.",
       placement: "bottom"
     },
     {
       name: "TOS",
       size: "-2",
       id: "staticBox",
-      data: "The type of service (ToS) field is the second byte of the IPv4 header. It has had various purposes over the years, and has been defined in different ways by five RFCs.",
+      data: "The Type of Service is used to request a low delay route and priority.",
       placement: "bottom"
     },
     {
       name: "Length",
       size: "-6",
       id: "staticBox",
-      data: "This 16-bit field defines the entire packet size in bytes, including header and data. The minimum size is 20 bytes.",
+      data: "This includes the size of the packet including the header. Maximum size is 65,535 bytes and minimum size is 20 bytes.",
       placement: "bottom"
     },
   ],
@@ -253,21 +268,21 @@ let IPv4 = [
       name: "Ident",
       size: "-6",
       id: "staticBox",
-      data: "This field is an identification field and is primarily used for uniquely identifying the group of fragments of a single IP datagram.",
+      data: "This identifies the fragments of an IP datagram.",
       placement: "bottom"
     },
     {
       name: "Flags",
       size: "-2",
       id: "staticBox",
-      data: "A three-bit field follows and is used to control or identify fragments.",
+      data: "This is used to identify fragments. If the second bit is set then the packet will not be fragmented, and it will be dropped if it can not be routed without fragmentation. If the third bit is set then more fragments are expected, if not set then it will be the last fragment.",
       placement: "bottom"
     },
     {
       name: "Offset",
       size: "-4",
       id: "staticBox",
-      data: "The fragment offset field is measured in units of eight-byte blocks. It is 13 bits long and specifies the offset of a particular fragment relative to the beginning of the original unfragmented IP datagram.",
+      data: "This is used to place the fragmented packet in the correct position within the entire unfragmented packet. The value is multiplied by 8 which gives the maximum size of 212 × 8 = 65,528 bytes.",
       placement: "bottom"
     },
   ]
@@ -277,21 +292,21 @@ let IPv4 = [
       name: "TTL",
       size: "-4",
       id: "staticBox",
-      data: "An eight-bit time to live field helps prevent datagrams from persisting (e.g. going in circles) on an internet.",
+      data: "Time to Live helps prevent packets from circling the internet indefinitely. It also helps with counting hops since every time a packet reaches a router the TTL is decreased until it reaches zero then the packet gets dropped.",
       placement: "bottom"
     },
     {
       name: "Protocol",
       size: "-2",
       id: "staticBox",
-      data: "This field defines the protocol used in the data portion of the IP datagram.",
+      data: "This includes the protocol carried in the data section of the IPv4 packet.",
       placement: "bottom"
     },
     {
       name: "Checksum",
       size: "-6",
       id: "staticBox",
-      data: "The 16-bit IPv4 header checksum field is used for error-checking of the header.",
+      data: "Checksum is used for error checking.",
       placement: "bottom"
     },
   ],
@@ -300,7 +315,7 @@ let IPv4 = [
       name: "SourceAddr",
       size: "",
       id: "staticBox",
-      data: "This field is the IPv4 address of the sender of the packet.",
+      data: "Includes the IPv4 address of the source node.",
       placement: "bottom"
     }
   ],
@@ -309,7 +324,7 @@ let IPv4 = [
       name: "DestinationAddr",
       size: "",
       id: "staticBox",
-      data: "This field is the IPv4 address of the receiver of the packet.",
+      data: "Includes the IPv4 address of the destination node.",
       placement: "bottom"
     }
   ],
@@ -318,23 +333,23 @@ let IPv4 = [
       name: "Options (variable)",
       size: "-9",
       id: "staticBox",
-      data: "The options field is not often used.",
+      data: "This field is not usually used.",
       placement: "bottom"
     },
     {
       name: "Pad (variable)",
       size: "-3",
       id: "staticBox",
-      data: "Any padding needed to ensure that the header contains an integer number of 32-bit words.",
+      data: "This is used to ensure that the packet length is a multiple of 32 bits.",
       placement: "bottom"
     }
   ],
   [
     {
-      name: "Data",
+      name: "Payload",
       size: " dropdown",
       id: "selectBoxData",
-      data: "The packet payload is not included in the checksum. Its contents are interpreted based on the value of the Protocol header field.",
+      data: "This includes the data carried in the IPv4 packet.",
       placement: "top",
       list: [
         {
@@ -358,14 +373,14 @@ let TCP = [
       name: "SrcPort",
       size: "-6",
       id: "staticBox",
-      data: "Identifies the sending port.",
+      data: "Includes the sending port.",
       placement: "bottom"
     },
     {
       name: "DstPort",
       size: "-6",
       id: "staticBox",
-      data: "Identifies the receiving port.",
+      data: "Includes the receiving port.",
       placement: "bottom"
     }
   ],
@@ -374,7 +389,7 @@ let TCP = [
       name: "SequenceNum",
       size: "",
       id: "staticBox",
-      data: "Has a dual role: If the SYN flag is set (1), then this is the initial sequence number. The sequence number of the actual first data byte and the acknowledged number in the corresponding ACK are then this sequence number plus 1. If the SYN flag is clear (0), then this is the accumulated sequence number of the first data byte of this segment for the current session.",
+      data: "This includes two main functionalities. When the SYN flag is set then it will include the initial sequence number. When the SYN flag is not set then it will include the accumulated sequence number.",
       placement: "bottom"
     }
   ],
@@ -383,7 +398,7 @@ let TCP = [
       name: "Acknowledgment",
       size: "",
       id: "staticBox",
-      data: "If the ACK flag is set then the value of this field is the next sequence number that the sender of the ACK is expecting.",
+      data: "When the ACK flag is set this will include the next sequence number.",
       placement: "bottom"
     }
   ],
@@ -392,7 +407,7 @@ let TCP = [
       name: "HdrLen",
       size: "-2",
       id: "staticBox",
-      data: "A HdrLen field is included that gives the length of the header in 32-bit words.",
+      data: "This includes the length of the header.",
       placement: "bottom"
     },
     {
@@ -406,14 +421,14 @@ let TCP = [
       name: "Flags",
       size: "-2",
       id: "staticBox",
-      data: "Contains 9 1-bit flags.",
+      data: "This includes 9 1-bit flags.",
       placement: "bottom"
     },
     {
       name: "AdvertisedWindow",
       size: "-6",
       id: "staticBox",
-      data: "The size of the receive window, which specifies the number of window size units that the sender of this segment is currently willing to receive.",
+      data: "This includes the receive window size.",
       placement: "bottom"
     }
   ],
@@ -422,14 +437,14 @@ let TCP = [
       name: "Checksum",
       size: "-6",
       id: "staticBox",
-      data: "The 16-bit checksum field is used for error-checking of the header, the Payload and a Pseudo-Header.",
+      data: "Checksum is used for error checking.",
       placement: "bottom"
     },
     {
       name: "UrgPtr",
       size: "-6",
       id: "staticBox",
-      data: "if the URG flag is set, then this 16-bit field is an offset from the sequence number indicating the last urgent data byte.",
+      data: "When URG flag is set then this will include an offset from the sequence number.",
       placement: "bottom"
     }
   ],
@@ -438,7 +453,7 @@ let TCP = [
       name: "Options (variable)",
       size: "",
       id: "staticBox",
-      data: "The length of this field is determined by the data offset field.",
+      data: "This includes; Option-Kind, Option-Length, and Option-Data.",
       placement: "bottom"
     }
   ],
@@ -447,7 +462,7 @@ let TCP = [
       name: "Data",
       size: "",
       id: "staticBoxData",
-      data: "",
+      data: "This includes the data carried in the packet.",
       placement: "bottom"
     }
   ]
@@ -459,21 +474,21 @@ let ICMP = [
       name: "Type",
       size: "-3",
       id: "staticBox",
-      data: "",
+      data: "Includes the ICMP type.",
       placement: "bottom"
     },
     {
       name: "Code",
       size: "-3",
       id: "staticBox",
-      data: "",
+      data: "Includes the ICMP subtype.",
       placement: "bottom"
     },
     {
       name: "Checksum",
       size: "-6",
       id: "staticBox",
-      data: "",
+      data: "Checksum is used for error checking.",
       placement: "bottom"
     }
   ],
@@ -482,14 +497,14 @@ let ICMP = [
       name: "Identifier",
       size: "-6",
       id: "staticBox",
-      data: "",
+      data: "Used with a timestamp request.",
       placement: "bottom"
     },
     {
       name: "Sequence Number",
       size: "-6",
       id: "staticBox",
-      data: "",
+      data: "Used with a timestamp request.",
       placement: "bottom"
     }
   ],
@@ -498,7 +513,7 @@ let ICMP = [
       name: "Optional Data",
       size: "",
       id: "staticBoxData",
-      data: "",
+      data: "Includes a copy of the IP header, and the first 8 bytes of the data.",
       placement: "bottom"
     }
   ]
@@ -510,14 +525,14 @@ let UDP = [
       name: "Source Port",
       size: "",
       id: "staticBox",
-      data: "Identifies the sending port.",
+      data: "Includes the sending port.",
       placement: "bottom"
     },
     {
       name: "Destination Port",
       size: "",
       id: "staticBox",
-      data: "Identifies the receiving port.",
+      data: "Includes the receiving port.",
       placement: "bottom"
     }
   ],
@@ -526,14 +541,14 @@ let UDP = [
       name: "Length",
       size: "",
       id: "staticBox",
-      data: "This field that specifies the length in bytes of the UDP header and UDP data.",
+      data: "This includes the length of the header.",
       placement: "bottom"
     },
     {
       name: "Checksum",
       size: "",
       id: "staticBox",
-      data: "The checksum field may be used for error-checking of the header and data.",
+      data: "Checksum is used for error checking.",
       placement: "bottom"
     }
   ],
@@ -542,7 +557,7 @@ let UDP = [
       name: "Data",
       size: "",
       id: "staticBoxData",
-      data: "",
+      data: "This includes the data carried in the packet.",
       placement: "bottom"
     }
   ]
@@ -555,21 +570,21 @@ let IPv6 = [
       name: "Version",
       size: "-2",
       id: "staticBox",
-      data: "The constant 6 (bit sequence 0110).",
+      data: "Include a constant value of 6.",
       placement: "bottom"
     },
     {
       name: "TrafficClass",
       size: "-3",
       id: "staticBox",
-      data: "The bits of this field hold two values. The six most-significant bits hold the Differentiated Services (DS) field, which is used to classify packets. Currently, all standard DS fields end with a '0' bit. Any DS field that ends with two '1' bits is intended for local or experimental use. The remaining two bits are used for Explicit Congestion Notification (ECN).",
+      data: "This includes two main functionalities. The first 6 bits are called Differentiated Services, it is used to classify packets. The last 2 bits are called Explicit Congestion Notification, it is used for congestion control.",
       placement: "bottom"
     },
     {
       name: "FlowLabel",
       size: "",
       id: "staticBox",
-      data: "Originally created for giving real-time applications special service. When set to a non-zero value, it serves as a hint to routers and switches with multiple outbound paths that these packets should stay on the same path.",
+      data: "This is used to make sure that the packet stays on the same path when set to non-zero.",
       placement: "bottom"
     }
   ],
@@ -578,21 +593,21 @@ let IPv6 = [
       name: "PayloadLen",
       size: "-6",
       id: "staticBox",
-      data: "The size of the payload in octets, including any extension headers.",
+      data: "This includes the size of the payload carried in octets.",
       placement: "bottom"
     },
     {
       name: "NextHeader",
       size: "-3",
       id: "staticBox",
-      data: "Specifies the type of the next header. This field usually specifies the transport layer protocol used by a packet's payload.",
+      data: "This includes the protocol carried in the payload section of the IPv6 packet.",
       placement: "bottom"
     },
     {
       name: "HopeLimit",
       size: "",
       id: "staticBox",
-      data: "Replaces the time to live field of IPv4.",
+      data: "Hope Limit prevent packets from circling the internet indefinitely. It also helps with counting hops since every time a packet reaches a router the HopeLimit is decreased until it reaches zero then the packet gets dropped.",
       placement: "bottom"
     }
   ],
@@ -601,7 +616,7 @@ let IPv6 = [
       name: "SourceAddress",
       size: "",
       id: "staticBox",
-      data: "The IPv6 address of the sending node.",
+      data: "Includes the IPv6 address of the source node.",
       placement: "bottom"
     }
   ],
@@ -637,7 +652,7 @@ let IPv6 = [
       name: "DestinationAddress",
       size: "",
       id: "staticBox",
-      data: "The IPv6 address of the destination node(s).",
+      data: "Includes the IPv6 address of the source node.",
       placement: "bottom"
     }
   ],
@@ -673,7 +688,7 @@ let IPv6 = [
       name: "Next Header/Data",
       size: " dropdown",
       id: "selectBoxData",
-      data: "",
+      data: "This includes the data carried in the IPv6 packet.",
       placement: "top",
       list: [
         {
